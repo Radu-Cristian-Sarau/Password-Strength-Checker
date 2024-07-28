@@ -15,6 +15,8 @@
     --header-color: #666;
     --password-color: #fff;
     --weak-color: #f00;
+    --medium-color: #ffa500;
+    --strong-color: #0f0;
 }
 
 body {
@@ -75,7 +77,50 @@ body {
     width: 0;
     height: 100%;
     transition: 0.5s;
+}
+
+.container.weak .strengthMeter::before {
+    width: 33.33%;
     background: var(--weak-color);
+    filter: drop-shadow(0 0 5px var(--weak-color)) drop-shadow(0 0 10px var(--weak-color)) drop-shadow(0 0 20px var(--weak-color));
+}
+
+.container.medium .strengthMeter::before {
+    width: 66.66%;
+    background: var(--medium-color);
+    filter: drop-shadow(0 0 5px var(--medium-color)) drop-shadow(0 0 10px var(--medium-color)) drop-shadow(0 0 20px var(--medium-color));
+}
+
+.container.strong .strengthMeter::before {
+    width: 100%;
+    background: var(--strong-color);
+    filter: drop-shadow(0 0 5px var(--strong-color)) drop-shadow(0 0 10px var(--strong-color)) drop-shadow(0 0 20px var(--strong-color));
+}
+
+.container .strengthMeter::after {
+    position: absolute;
+    top: -45px;
+    left: 30px;
+    color: var(--password-color);
+    transition: 0.5s;
+}
+
+.container.weak .strengthMeter::after {
+    content: 'Your password is weak';
+    color: var(--weak-color);
+    filter: drop-shadow(0 0 5px var(--weak-color));
+}
+
+.container.medium .strengthMeter::after {
+    content: 'Your password is medium';
+    color: var(--medium-color);
+    filter: drop-shadow(0 0 5px var(--medium-color));
+}
+
+.container.strong .strengthMeter::after {
+    content: 'Your password is strong';
+    color: var(--strong-color);
+    filter: drop-shadow(0 0 5px var(--strong-color));
 }
 
 .show {
@@ -98,4 +143,8 @@ body {
     color: var(--password-color);
     letter-spacing: 0.1rem;
     text-transform: uppercase;
+}
+
+.show.hide::before {
+    content: 'Hide';
 }
